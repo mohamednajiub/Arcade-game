@@ -51,14 +51,14 @@ Player.prototype.handleInput = function(keyCode) {
                 this.y += 85;
             }
         break;
-        case "right":
-            if(this.x < 400 ) {
-                this.x += 100;
-            }
-        break;
         case "left":
             if(this.x > 0) {
                 this.x -= 100;
+            }
+        break;
+        case "right":
+            if(this.x < 400 ) {
+                this.x += 100;
             }
         break;
     }
@@ -91,6 +91,10 @@ function init(){
         let x = -50,
             y = yArray[Math.floor(Math.random() * yArray.length)],
             speed = Math.floor(Math.random() * 11);
+            // making sure speed will not equal 0
+            if (speed === 0){
+                speed += 5;
+            }
         allEnemies.push(new Enemy(x, y, speed));
     }
 }
