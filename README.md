@@ -1,6 +1,18 @@
-frontend-nanodegree-arcade-game
-===============================
+# Arcade Game
+=============
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+This Game is made with pure JavaScript and Html5 Canvas.
+here is the image from the game ![image](Capture.png). 
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+### how to win?
+simply you should cross th character to the water.
+
+### how to play?
+open the [live Preview](https://muhammedemad.github.io/Arcade-game/.).
+use the arrow keys only to control in your character.
+
+### Rules
+Each time the character arrive to the water you will gain 20 point.
+Each time the Enemy touch the player you will lose 1 live.
+You have only 3 times to try.
+
