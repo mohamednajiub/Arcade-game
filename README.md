@@ -15,3 +15,13 @@ Each time the character arrive to the water you will gain 20 point.
 Each time the Enemy touch the player you will lose 1 live.
 You have only 3 times to try.
 
+
+### how to load the game locally?
+
+you can do it in defirence two ways:-
+A- Download the zip file
+B- by command line you can clone the project by:
+
+```
+git clone https://github.com/muhammedemad/Arcade-game.git
+```

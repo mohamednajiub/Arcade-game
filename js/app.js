@@ -1,4 +1,4 @@
-// initialize the variable
+// initialize the Game variable
 const modal = document.querySelector('.modal'),
     playAgain = document.getElementById('playAgain'),
     live = document.querySelector('.live'),
