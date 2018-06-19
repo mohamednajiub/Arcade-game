@@ -1,8 +1,7 @@
 # Arcade Game
-=============
 
 This Game is made with pure JavaScript and Html5 Canvas.
-here is the image from the game ![image](Capture.png). 
+here is the image from the game ![image](./images/Capture.png). 
 
 ### how to win?
 simply you should cross th character to the water.
