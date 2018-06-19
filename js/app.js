@@ -2,7 +2,8 @@
 const modal = document.querySelector('.modal'),
     playAgain = document.getElementById('playAgain'),
     live = document.querySelector('.live'),
-    scoreContainer = document.querySelector('.score');
+    dashScore = document.querySelector('.score'),
+    modalScore = document.getElementById('score');
 
 let lives,
     score;
@@ -47,8 +48,7 @@ var Player = function(x, y) {
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
     if (player.y === -35 ) {
-        addScore();
-        
+        addScore();   
     }
     
     playAgain.addEventListener('click',()=>{
@@ -111,6 +111,8 @@ function checkCollisions() {
             if (lives === 0 ){
                 lives = 0;
                 modal.style.display = "block";
+                dashScore.innerHTML = score;
+                modalScore.innerHTML = score;
             }
             live.innerHTML = `X${lives}`
         }
@@ -119,7 +121,7 @@ function checkCollisions() {
 
 function addScore() {
     score += 20;
-    scoreContainer.innerHTML = score;
+    dashScore.innerHTML = score;
     player.x = 200;
     player.y = 390;
 }
@@ -131,7 +133,7 @@ function init(){
     lives = 3;
     score = 0;
     live.innerHTML = `X${lives}`;
-    scoreContainer.innerHTML = score;
+    dashScore.innerHTML = score;
     allEnemies = [];
     for (let i = 0; i < 5; i++) {
         let x = -50,
