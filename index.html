@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+    <div class="dashboard">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="./images/Heart.png" alt="live" width="50px" height="100px">
+                    </td>
+                    <td class="live"></td>
+                    <td>
+                        <p>Score</p>
+                    </td>
+                    <td class="score"> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <h1>Game Over</h1>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>Score</p>
+                    </td>
+                    <td class="score"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="playAgain">Play Again</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
 </body>
+
 </html>
