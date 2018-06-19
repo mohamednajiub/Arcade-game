@@ -1,16 +1,20 @@
+// initialize the variable
 const modal = document.querySelector('.modal'),
     playAgain = document.getElementById('playAgain'),
     live = document.querySelector('.live'),
-    score = document.querySelector('.score');
-let lives = 5;
+    scoreContainer = document.querySelector('.score');
 
-live.innerHTML = `X ${lives}`
+let lives,
+    score;
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.width = 50;
+    this.height = 85;
     // The image/sprite for our enemies, this uses
     this.sprite = 'images/enemy-bug.png';
 };
@@ -34,6 +38,8 @@ var Player = function(x, y) {
     // Variables applied to each of our instances go here,
     this.x = x;
     this.y = y;
+    this.width = 75;
+    this.height = 85;
     // The image/sprite for our player, this uses
     this.sprite = 'images/char-boy.png';
 };
@@ -41,7 +47,8 @@ var Player = function(x, y) {
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
     if (player.y === -35 ) {
-        modal.style.display = "block";
+        addScore();
+        
     }
     
     playAgain.addEventListener('click',()=>{
@@ -96,18 +103,35 @@ document.addEventListener('keyup', function(e) {
 // check Collisions function.
 function checkCollisions() {
     allEnemies.forEach(function(enemy) {
-        if (player.x === enemy.x) {
-            console.log('die');
+        if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
+            player.y < enemy.y + enemy.height && player.height + player.y > enemy.y) {
+            
+            lives --;
+            player.y = 390;
+            if (lives === 0 ){
+                lives = 0;
+                modal.style.display = "block";
+            }
+            live.innerHTML = `X${lives}`
         }
     });
 }
 
+function addScore() {
+    score += 20;
+    scoreContainer.innerHTML = score;
+    player.x = 200;
+    player.y = 390;
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [],
     yArray = [50,50,50,50,50,50,50,135,135,135,135,135,135,135,135,135,220,220,220,220,220,220,220,220,220,220,220,220];
 function init(){
-    lives = 5;
+    lives = 3;
+    score = 0;
+    live.innerHTML = `X${lives}`;
+    scoreContainer.innerHTML = score;
     allEnemies = [];
     for (let i = 0; i < 5; i++) {
         let x = -50,
