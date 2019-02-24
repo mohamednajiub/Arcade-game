@@ -1,7 +1,7 @@
 // initialize the Game variable
 const modal = document.querySelector('.modal'),
     playAgain = document.getElementById('playAgain'),
-    live = document.querySelector('.live'),
+    life = document.querySelector('.life'),
     dashScore = document.querySelector('.score'),
     modalScore = document.getElementById('score');
 
@@ -114,7 +114,7 @@ function checkCollisions() {
                 dashScore.innerHTML = score;
                 modalScore.innerHTML = score;
             }
-            live.innerHTML = `X${lives}`
+            life.innerHTML = `X${lives}`
         }
     });
 }
@@ -132,7 +132,7 @@ let allEnemies = [],
 function init(){
     lives = 3;
     score = 0;
-    live.innerHTML = `X${lives}`;
+    life.innerHTML = `X${lives}`;
     dashScore.innerHTML = score;
     allEnemies = [];
     for (let i = 0; i < 5; i++) {
