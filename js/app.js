@@ -7,13 +7,13 @@ const modal = document.querySelector('.modal'),
 
 let score;
 
-
-
 // Random function to calculate speed of the enemy
 function getRandomSpeed(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
-// Enemies that must our player must avoid
+
+/* Start Enemies =========================*/
+// Enemy object that must our player must avoid
 var Enemy = function (x, y) {
     // Variables applied to each of our instances go here,
     this.x = x;
@@ -21,7 +21,7 @@ var Enemy = function (x, y) {
     this.speed = getRandomSpeed(1, 10);
     this.width = 50;
     this.height = 85;
-    // The image/soul for our enemies, this uses
+    // The image/soul for our enemies
     this.soul = 'images/enemy-bug.png';
 };
 
@@ -40,11 +40,11 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.soul), this.x, this.y);
 };
 
+/*========================= End Enemies */
 
 // Start Player object
 class Player {
     constructor(x, y) {
-        // Variables applied to each of our instances go here
         // The image/soul for our player, this uses, the default soul is the boy
         this.soul = 'images/char-boy.png';
         this.x = x;
@@ -52,14 +52,14 @@ class Player {
         this.width = 75;
         this.height = 85;
         // player lifes
-        this.life = 5;
+        this.life = 3;
     }
     // Draw the Player on the screen, required method for game
     render() {
         ctx.drawImage(Resources.get(this.soul), this.x, this.y);
     };
     // Parameter: dt, a time delta between ticks
-    update(dt) {
+    update() {
         if (player.y === -35) {
             addScore();
         }
@@ -96,27 +96,27 @@ class Player {
     }
 };
 
-function select(){
-    const characters = document.querySelectorAll(".character");
-    for (let i = 0; i < characters.length; i++) {
-        // Loop over Character Images and Change the Selected one based on a 'Click' event
-        characters[i].addEventListener("click", () => {
-            // Change the player image
-            player.soul = "'" + characters[i].getAttribute("src") + "'";
-            player.update();
-        });
-    }
+// select chrachter
+
+const characters = document.querySelectorAll(".character");
+for (let i = 0; i < characters.length; i++) {
+    // Loop over Character Images and Change the Selected one based on a 'Click' event
+    characters[i].addEventListener("click", function () {
+        // Change the player image
+        player.soul =  characters[i].getAttribute("src");
+    });
 }
 
+
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function (e) {
+document.addEventListener('keyup', function (event) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down'
     };
-    player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[event.keyCode]);
 });
 
 // check Collisions function.
@@ -124,6 +124,7 @@ function checkCollisions() {
     allEnemies.forEach(function (enemy) {
         if (player.x < (enemy.x + enemy.width) && (player.x + player.width) > enemy.x && player.y < (enemy.y + enemy.height) && (player.height + player.y) > enemy.y) {
             player.life--;
+            player.x = 200;
             player.y = 390;
             if (player.life === 0) {
                 modal.style.display = "block";
@@ -135,6 +136,7 @@ function checkCollisions() {
     });
 }
 
+// sore function
 function addScore() {
     score += 20;
     dashScore.innerHTML = score;
@@ -145,7 +147,6 @@ function addScore() {
         life.innerHTML = `X ${player.life}`;
     }
 }
-
 
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [],
@@ -163,11 +164,12 @@ function init() {
         allEnemies.push(new Enemy(x, y));
     }
 }
+
 // reset the player data when it dies
 function reset() {
     player.x = 200;
     player.y = 390;
-    player.life = 5;
+    player.life = 3;
     life.innerHTML = `X ${player.life}`;
 }
 
