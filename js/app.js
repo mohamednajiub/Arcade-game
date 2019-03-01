@@ -8,7 +8,7 @@ const modal = document.querySelector('.modal'),
 let score;
 
 // Random function to calculate speed of the enemy
-function getRandomSpeed(min, max) {
+function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -18,7 +18,7 @@ var Enemy = function (x, y) {
     // Variables applied to each of our instances go here,
     this.x = x;
     this.y = y;
-    this.speed = getRandomSpeed(1, 10);
+    this.speed = getRandomNumber(1, 10);
     this.width = 50;
     this.height = 85;
     // The image/soul for our enemies
@@ -39,6 +39,49 @@ Enemy.prototype.update = function (dt) {
 Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.soul), this.x, this.y);
 };
+
+/*========================= Start Gems */
+let gemTypes = [
+    'images/gem-blue.png',
+    'images/gem-green.png',
+    'images/gem-orange.png'
+]
+function Gem () {
+    this.x = getRandomNumber(50, 450);
+    this.y = getRandomNumber(37, 300);
+    this.width = 50;
+    this.height = 85;
+    this.type = gemTypes[Math.floor(Math.random() * gemTypes.length)]; // get random item from an array
+    if (this.type == 'images/gem-blue.png'){
+        this.score = 40;
+    } else if (this.type == 'images/gem-green.png'){
+        this.score = 30;
+    } else if (this.type == 'images/gem-orange.png'){
+        this.score = 20;
+    } else {
+        this.score = 20;
+    }
+}
+
+Gem.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.type), this.x, this.y);
+}
+
+Gem.prototype.update = function() {
+    if (player.x < (gem.x + gem.width) && (player.x + player.width) > gem.x && player.y < (gem.y + gem.height) && (player.height + player.y) > gem.y) {
+        this.addScore();
+    }
+}
+
+Gem.prototype.addScore = function(){
+    score += this.score;
+    dashScore.innerHTML = score;
+    updateScore();
+    this.x = getRandomNumber(50, 450);
+    this.y = getRandomNumber(37, 300);
+    this.type = gemTypes[Math.floor(Math.random() * gemTypes.length)]; // get random item from an array
+    // new Gem();
+}
 
 /*========================= End Enemies */
 
@@ -142,7 +185,11 @@ function addScore() {
     dashScore.innerHTML = score;
     player.x = 200;
     player.y = 390;
-    if (score % 100 == 0 ){
+    updateScore();
+}
+
+function updateScore(){
+    if (score % 100 === 0 ){
         player.life++
         life.innerHTML = `X ${player.life}`;
     }
@@ -150,7 +197,9 @@ function addScore() {
 
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [],
-    yArray = [50, 50, 50, 50, 50, 50, 50, 135, 135, 135, 135, 135, 135, 135, 135, 135, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220];
+    yArray = [
+        50, 50, 50, 50, 50, 50, 50, 135, 135, 135, 135, 135, 135, 135, 135, 135, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220
+    ];
 
 // initialize the game
 function init() {
@@ -174,6 +223,8 @@ function reset() {
 }
 
 // Place the player object in a variable called player
+var gem = new Gem();
 var player = new Player(200, 390);
+
 init();
 
